@@ -6,11 +6,10 @@ import { CharacterContextProvider } from "./Contexts/Fetch/CharacterContextprovi
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <CharacterContextProvider>
-      <App />
-    </CharacterContextProvider>
-  </React.StrictMode>,
+  <CharacterContextProvider>
+    <App />
+  </CharacterContextProvider>,
+
   document.getElementById("root")
 );
 

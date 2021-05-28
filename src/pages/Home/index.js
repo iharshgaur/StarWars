@@ -5,13 +5,24 @@ import useDebounce from "../../Hooks/useDebounce";
 import { CharacterContext } from "../../Contexts/Fetch/CharacterContextprovider";
 import "./index.css";
 import { v4 as uuidv4 } from "uuid";
+import styled from "styled-components";
 
+const Results = styled.div`
+  max-height: 300px;
+  overflow-y: auto;
+  border-radius: 20px;
+  margin-bottom: 10px;
+
+  & :nth-child(${({ active }) => active}) {
+    color: #ffeb00;
+  }
+`;
 function HomePage() {
   const [query, setQuery] = React.useState("");
-
   const [spinner, setSpinner] = React.useState(false);
+  const [active, setActive] = React.useState(0);
   let history = useHistory();
-  const { data, handleSearch, setData, setCurrentCharacter, send } =
+  const { data, handleSearch, setData, setCurrentCharacter, send, changeSend } =
     useContext(CharacterContext);
   const debouncedSearchTerm = useDebounce(query, 500);
 
@@ -19,9 +30,12 @@ function HomePage() {
     if (debouncedSearchTerm.trim() !== "") {
       handleSearch(debouncedSearchTerm);
       setSpinner(false);
+      setActive(0);
     } else {
       setData("");
       setSpinner(false);
+      changeSend(false);
+      setActive(0);
     }
     // eslint-disable-next-line
   }, [debouncedSearchTerm]);
@@ -31,8 +45,43 @@ function HomePage() {
     history.push(`/person/${id}`);
   }
 
+  function handleKeyChange(e) {
+    switch (e.keyCode) {
+      case 38: {
+        if (active === data.length - 1) {
+          setActive(0);
+        } else if (active <= 0) {
+          setActive(data.length + 1);
+        } else {
+          setActive((prev) => prev - 1);
+        }
+        break;
+      }
+      case 40: {
+        if (active === 0) {
+          setActive((prev) => prev + 2);
+        } else if (active > data.length) {
+          setActive(0);
+        } else {
+          setActive((prev) => prev + 1);
+        }
+
+        break;
+      }
+      case 13: {
+        if (active && data.length > 0) {
+          history.push(`/person/${active - 2}`);
+        }
+        break;
+      }
+      default: {
+        return;
+      }
+    }
+  }
+
   return (
-    <div className="search">
+    <div className="search" onKeyUp={(e) => handleKeyChange(e)}>
       <div className="logo">
         <img src={logo} alt="Star Wars Logo" />
       </div>
@@ -40,7 +89,7 @@ function HomePage() {
       <div className="search__searchbox">
         <div className="search__searchbox__input">
           <input
-            placeholder="Search by name"
+            placeholder="Search characters by name"
             value={query}
             onChange={(e) => {
               setQuery(e.target.value);
@@ -66,6 +115,7 @@ function HomePage() {
                     onClick={() => {
                       setData("");
                       setQuery("");
+                      changeSend(false);
                     }}
                   />
 
@@ -102,28 +152,34 @@ function HomePage() {
         {data.length > 0 ? (
           <>
             <hr></hr>
-            <div className="results">
+            <Results className="results" active={active}>
+              <div></div>
               {data &&
-                data?.map((character) => (
-                  <div
-                    className="search__searchbox__results"
-                    key={uuidv4()}
-                    onClick={() => setCharacter(character, uuidv4())}
-                  >
-                    <div className="character__info">
-                      <div>
-                        <p style={{ fontSize: "15px" }}>{character.name}</p>
+                data?.map((character, index) => {
+                  return (
+                    <div
+                      className="search__searchbox__results"
+                      key={uuidv4()}
+                      onMouseOver={() => {
+                        setActive(index + 1);
+                      }}
+                      onClick={() => setCharacter(character, index)}
+                    >
+                      <div className="character__info">
+                        <div>
+                          <p style={{ fontSize: "15px" }}>{character.name}</p>
+                          <p style={{ fontSize: "12px", color: "#babcbe" }}>
+                            {character.birth_year}{" "}
+                          </p>
+                        </div>
                         <p style={{ fontSize: "12px", color: "#babcbe" }}>
-                          {character.birth_year}{" "}
+                          {character.gender}
                         </p>
                       </div>
-                      <p style={{ fontSize: "12px", color: "#babcbe" }}>
-                        {character.gender}
-                      </p>
                     </div>
-                  </div>
-                ))}
-            </div>
+                  );
+                })}
+            </Results>
           </>
         ) : null}
       </div>
