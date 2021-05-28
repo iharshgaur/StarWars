@@ -3,6 +3,7 @@
   width: 80%;
   max-width: 500px;
   border: 0;
+  background: transparent;
   border-radius: 15px;
   padding: 20px 15px;
   display: block;
@@ -17,6 +18,7 @@
 .person > div {
   display: flex;
   width: 100%;
+  background: transparent;
   justify-content: space-evenly;
   flex-wrap: wrap;
   align-items: center;
@@ -26,6 +28,7 @@
   border-radius: 10px;
   text-align: center;
   margin: 5px;
+  background: transparent;
   transition: 0.2s;
   width: 200px;
 }
@@ -34,6 +37,110 @@
   border: 1px solid #fff;
   transition: 0.2s;
 }
+
+.backButton {
+  height: 30px;
+  background: transparent;
+  margin: 50px 0;
+  border: 1px solid #ecd014;
+  border-radius: 10px;
+  color: #ecd014;
+  font-size: 20px;
+  padding: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.dark {
+  color: rgb(247, 54, 54);
+  width: 80%;
+  max-width: 500px;
+  border: 0;
+  background: transparent;
+  border-radius: 15px;
+  padding: 20px 15px;
+  display: block;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgb(247, 54, 54);
+  animation: dark 2s infinite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.dark > div {
+  display: flex;
+  width: 100%;
+  background: transparent;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.dark > div > div {
+  border: 1px solid rgb(247, 54, 54);
+  border-radius: 10px;
+  text-align: center;
+  margin: 5px;
+  background: transparent;
+  transition: 0.2s;
+  width: 200px;
+}
+.dark > div > div:hover {
+  color: white;
+  border: 1px solid #fff;
+  transition: 0.2s;
+}
+
+.backButtonDark {
+  height: 30px;
+  background: transparent;
+  margin: 50px 0;
+  border: 1px solid rgb(247, 54, 54);
+  border-radius: 10px;
+  color: rgb(247, 54, 54);
+  font-size: 20px;
+  padding: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+.backButton:hover,
+.backButtonDark:hover {
+  color: white;
+  border: 1px solid white;
+  transition: 0.2s;
+}
+
+/* animations for pulse */
+@-webkit-keyframes dark {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgb(247, 54, 54);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+  }
+}
+@keyframes dark {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgb(247, 54, 54);
+    box-shadow: 0 0 0 0 rgb(247, 54, 54);
+  }
+  70% {
+    -moz-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+  }
+  100% {
+    -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+  }
+}
+
 @-webkit-keyframes person {
   0% {
     -webkit-box-shadow: 0 0 0 0 #ecd014;

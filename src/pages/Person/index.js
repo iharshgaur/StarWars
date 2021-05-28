@@ -1,10 +1,13 @@
 import React from "react";
 import "./index.css";
+import { useHistory } from "react-router-dom";
 function Person() {
   const currentCharacter = JSON.parse(localStorage.getItem("currentCharacter"));
-
+  let history = useHistory();
   return (
-    <div className="person">
+    <div
+      className={currentCharacter.name === "Darth Vader" ? "dark" : "person"}
+    >
       <h1>{currentCharacter.name}</h1>
       <div>
         <div>
@@ -20,6 +23,16 @@ function Person() {
           <h4>Hair Color : {currentCharacter.hair_color}</h4>
         </div>
       </div>
+      <button
+        className={
+          currentCharacter.name === "Darth Vader"
+            ? "backButtonDark"
+            : "backButton"
+        }
+        onClick={() => history.push("/")}
+      >
+        Go Back
+      </button>
     </div>
   );
 }
