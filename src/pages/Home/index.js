@@ -26,6 +26,7 @@ const Character = styled.div`
 function HomePage() {
   let history = useHistory();
   const [query, setQuery] = React.useState("");
+
   const [spinner, setSpinner] = React.useState(false);
   const [active, setActive] = React.useState(0);
   const scrollRef = React.useRef();
@@ -47,22 +48,20 @@ function HomePage() {
     // eslint-disable-next-line
   }, [debouncedSearchTerm]);
 
-  function setCharacter(character, id) {
+  function setCharacter(character) {
     setCurrentCharacter(character);
     history.push(`/person/${character.name.trim().split(" ").join("-")}`);
   }
 
   function handleKeyChange(e) {
-    console.log(active);
     switch (e.keyCode) {
       case 38: {
         //arrow key up
-        console.log(active);
         if (active === 2) {
           setActive(0);
           scrollRef.current && (scrollRef.current.scrollTop = 0);
         } else if (active <= 0) {
-          setActive(data.length);
+          setActive(data.length + 1);
           scrollRef.current &&
             (scrollRef.current.scrollTop =
               scrollRef.current.scrollTop + data.length * 50);
