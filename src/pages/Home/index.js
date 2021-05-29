@@ -28,6 +28,7 @@ function HomePage() {
   const [query, setQuery] = React.useState("");
   const [spinner, setSpinner] = React.useState(false);
   const [active, setActive] = React.useState(0);
+  const scrollRef = React.useRef();
   const { data, handleSearch, setData, setCurrentCharacter, send, changeSend } =
     useContext(CharacterContext);
   const debouncedSearchTerm = useDebounce(query, 500);
@@ -48,37 +49,52 @@ function HomePage() {
 
   function setCharacter(character, id) {
     setCurrentCharacter(character);
-    history.push(`/person/${id}`);
+    history.push(`/person/${character.name.trim().split(" ").join("-")}`);
   }
 
   function handleKeyChange(e) {
+    console.log(active);
     switch (e.keyCode) {
       case 38: {
-        //keyup
-        if (active === data.length - 1) {
+        //arrow key up
+        console.log(active);
+        if (active === 2) {
           setActive(0);
+          scrollRef.current && (scrollRef.current.scrollTop = 0);
         } else if (active <= 0) {
-          setActive(data.length + 1);
+          setActive(data.length);
+          scrollRef.current &&
+            (scrollRef.current.scrollTop =
+              scrollRef.current.scrollTop + data.length * 50);
         } else {
           setActive((prev) => prev - 1);
+          scrollRef.current && (scrollRef.current.scrollTop -= 50);
         }
         break;
       }
       case 40: {
-        //keydown
+        //arrow key down
+
         if (active === 0) {
           setActive((prev) => prev + 2);
         } else if (active > data.length) {
           setActive(0);
+          scrollRef.current && (scrollRef.current.scrollTop = 0);
         } else {
           setActive((prev) => prev + 1);
+          scrollRef.current &&
+            active > 4 &&
+            (scrollRef.current.scrollTop += 80);
         }
         break;
       }
       case 13: {
+        //enter
         if (active && data.length > 0) {
           setCurrentCharacter(data[active - 2]);
-          history.push(`/person/${active - 2}`);
+          history.push(
+            `/person/${data[active - 2].name.trim().split(" ").join("-")}`
+          );
         }
         break;
       }
@@ -160,7 +176,7 @@ function HomePage() {
         {data.length > 0 ? (
           <>
             <hr></hr>
-            <Results className="results" active={active}>
+            <Results className="results" active={active} ref={scrollRef}>
               <div></div>
               {data &&
                 data?.map((character, index) => {
