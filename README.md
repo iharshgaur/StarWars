@@ -42,7 +42,10 @@ In this project we have used the following tech stack.
    ![Search results](./Snips/Search.JPG)
 
 3. Character Page
-![Character page](./Snips/Character.JPG)
+   ![Character page](./Snips/Character.JPG)
+
+4. Cypress Testing Results
+![Cypress Testing](./Snips/CypressTestResults.png)
 
    <br>
 
