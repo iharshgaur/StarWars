@@ -70,7 +70,7 @@ In this project we have used the following tech stack.
 ## Known Bugs
 
 1. Scrollbar CSS is not optimised.
-2. Searchbar placeholder not optimised for smaller devices.
+2. Placeholder for searchbar not optimised for smaller devices.
 3. Star animation glitches on playing or pausing the audio.
 
 <br>
