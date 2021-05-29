@@ -1,10 +1,12 @@
 import React from "react";
 import "./index.css";
 import { useHistory } from "react-router-dom";
-function Person(playSound, togglePlaySound) {
+function Person() {
+  // getting the current character from localStorage
   let currentCharacter = JSON.parse(localStorage.getItem("currentCharacter"));
   let history = useHistory();
   return (
+    //Handling easter egg when the character Darth Vader
     <div
       className={currentCharacter.name === "Darth Vader" ? "dark" : "person"}
     >
@@ -23,6 +25,8 @@ function Person(playSound, togglePlaySound) {
           <h4>Hair Color : {currentCharacter.hair_color}</h4>
         </div>
       </div>
+
+      {/* Handling easter egg when the character Darth Vader */}
       <button
         className={
           currentCharacter.name === "Darth Vader"
