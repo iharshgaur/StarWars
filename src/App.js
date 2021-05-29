@@ -9,10 +9,11 @@ import Theme from "./sounds/Theme.mp3";
 import "./App.css";
 
 function App() {
-  const [playSound, setPlaySound] = React.useState(false);
+  const [playSound, setPlaySound] = React.useState(false); // to toggle the theme music on the landing page
 
   return (
     <>
+      {/* Sound button */}
       <button
         style={{
           color: "#ffeb00",
@@ -41,12 +42,16 @@ function App() {
           />
         )}
       </button>
+
+      {/* Sound component */}
       <Sound
         url={Theme}
         playStatus={playSound ? Sound.status.PLAYING : Sound.status.STOPPED}
         playFromPosition={0 /* in milliseconds */}
         loop={true}
       />
+
+      {/* background star animation component */}
       <StarfieldAnimation
         style={{
           position: "absolute",
@@ -55,6 +60,8 @@ function App() {
           zIndex: 0,
         }}
       />
+
+      {/* Main app components */}
       <div className="app">
         <Router>
           <Switch>

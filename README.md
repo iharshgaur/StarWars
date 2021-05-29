@@ -67,14 +67,6 @@ In this project we have used the following tech stack.
 
 <br>
 
-## Known Bugs
-
-1. Scrollbar CSS is not optimised.
-2. Placeholder for searchbar not optimised for smaller devices.
-3. Star animation glitches on playing or pausing the audio.
-
-<br>
-
 ## Easter Egg
 
 Wanna know what happened to Anakin Skywalker when he joined the dark side? Search for the name he got after he became the super villan.
