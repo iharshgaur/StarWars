@@ -124,6 +124,8 @@ function HomePage() {
           {/* Search Bar */}
           <input
             placeholder="Search characters"
+            class="input-search"
+            autoFocus={true}
             value={query}
             onChange={(e) => {
               setQuery(e.target.value);
@@ -212,7 +214,12 @@ function HomePage() {
                     >
                       <div className="character__info">
                         <div>
-                          <p style={{ fontSize: "15px" }}>{character.name}</p>
+                          <p
+                            className="character__name"
+                            style={{ fontSize: "15px" }}
+                          >
+                            {character.name}
+                          </p>
                           <p style={{ fontSize: "12px", color: "#babcbe" }}>
                             {character.birth_year}{" "}
                           </p>

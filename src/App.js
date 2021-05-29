@@ -15,6 +15,7 @@ function App() {
     <>
       {/* Sound button */}
       <button
+        className="sound-btn"
         style={{
           color: "#ffeb00",
           position: "absolute",

@@ -10,7 +10,7 @@ function Person() {
     <div
       className={currentCharacter.name === "Darth Vader" ? "dark" : "person"}
     >
-      <h1>{currentCharacter.name}</h1>
+      <h1 className="character-name">{currentCharacter.name}</h1>
       <div>
         <div>
           <h2>Personal Info</h2>
