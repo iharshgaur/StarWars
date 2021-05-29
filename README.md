@@ -6,7 +6,7 @@
 
 <br>
 
-This repository contains the **StarWars Characters Searchbar** that was build as an assignment during interview process at **UrbanPiper**. It helps users to search about their favourite characters of Star Wars Universe.
+This repository contains the **StarWars Characters Searchbar** that was build as an assignment during interview process at **UrbanPiper**. It helps users to search about their favourite characters of Star Wars Universe. Enjoy and **May the force be with you**
 
 <br>
 
