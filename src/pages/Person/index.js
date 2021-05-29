@@ -1,10 +1,8 @@
 import React from "react";
 import "./index.css";
-import { useHistory, useParams } from "react-router-dom";
-function Person() {
+import { useHistory } from "react-router-dom";
+function Person(playSound, togglePlaySound) {
   let currentCharacter = JSON.parse(localStorage.getItem("currentCharacter"));
-  let { id } = useParams();
-  console.log(id);
   let history = useHistory();
   return (
     <div
