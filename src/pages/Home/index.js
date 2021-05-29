@@ -112,14 +112,18 @@ function HomePage() {
   return (
     <div className="search" onKeyUp={(e) => handleKeyChange(e)}>
       <div className="logo">
-        <img src={logo} alt="Star Wars Logo" />
+        <img
+          src={logo}
+          alt="Star Wars Logo"
+          style={{ backgroundColor: "transparent" }}
+        />
       </div>
 
       <div className="search__searchbox">
         <div className="search__searchbox__input">
           {/* Search Bar */}
           <input
-            placeholder="Search characters by name"
+            placeholder="Search characters"
             value={query}
             onChange={(e) => {
               setQuery(e.target.value);
@@ -224,6 +228,7 @@ function HomePage() {
           </>
         ) : null}
       </div>
+
       {/* Handling no result found */}
       {send && data.length === 0 && (
         <p style={{ fontSize: "12px", color: "#babcbe" }}>

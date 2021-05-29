@@ -25,6 +25,8 @@ function App() {
           border: 0,
           fontWeight: "bold",
           fontSize: "15px",
+          cursor: "pointer",
+          backgroundColor: "transparent",
         }}
         onClick={() => setPlaySound(!playSound)}
       >
