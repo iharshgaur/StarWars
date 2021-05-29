@@ -17,11 +17,17 @@ const Results = styled.div`
     color: #ffeb00;
   }
 `;
+
+const Character = styled.div`
+  & :hover {
+    color: #ffeb00;
+  }
+`;
 function HomePage() {
+  let history = useHistory();
   const [query, setQuery] = React.useState("");
   const [spinner, setSpinner] = React.useState(false);
   const [active, setActive] = React.useState(0);
-  let history = useHistory();
   const { data, handleSearch, setData, setCurrentCharacter, send, changeSend } =
     useContext(CharacterContext);
   const debouncedSearchTerm = useDebounce(query, 500);
@@ -48,6 +54,7 @@ function HomePage() {
   function handleKeyChange(e) {
     switch (e.keyCode) {
       case 38: {
+        //keyup
         if (active === data.length - 1) {
           setActive(0);
         } else if (active <= 0) {
@@ -58,6 +65,7 @@ function HomePage() {
         break;
       }
       case 40: {
+        //keydown
         if (active === 0) {
           setActive((prev) => prev + 2);
         } else if (active > data.length) {
@@ -65,11 +73,11 @@ function HomePage() {
         } else {
           setActive((prev) => prev + 1);
         }
-
         break;
       }
       case 13: {
         if (active && data.length > 0) {
+          setCurrentCharacter(data[active - 2]);
           history.push(`/person/${active - 2}`);
         }
         break;
@@ -157,11 +165,11 @@ function HomePage() {
               {data &&
                 data?.map((character, index) => {
                   return (
-                    <div
+                    <Character
                       className="search__searchbox__results"
                       key={uuidv4()}
                       onMouseOver={() => {
-                        setActive(index + 1);
+                        setActive(index + 2);
                       }}
                       onClick={() => setCharacter(character, index)}
                     >
@@ -176,7 +184,7 @@ function HomePage() {
                           {character.gender}
                         </p>
                       </div>
-                    </div>
+                    </Character>
                   );
                 })}
             </Results>
