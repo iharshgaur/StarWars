@@ -6,7 +6,7 @@ import { CharacterContext } from "../../Contexts/Fetch/CharacterContextprovider"
 import "./index.css";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-
+import spinnerAnimation from "../../svg/spinner.svg";
 const Results = styled.div`
   max-height: 300px;
   overflow-y: auto;
@@ -190,7 +190,7 @@ function HomePage() {
           )}
 
           {/* spinner animation */}
-          {spinner && <div className="loader"></div>}
+          {spinner && <img src={spinnerAnimation} alt="spinner" width="40px" />}
         </div>
 
         {data.length > 0 ? (
